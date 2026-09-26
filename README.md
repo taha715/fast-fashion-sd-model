@@ -18,9 +18,9 @@ Demographic assumptions are benchmarked to the EU market (ages 18–35, ~€1,50
 
 ## Model structure
 
-![Stock-flow diagram — consumer adoption, consumption, and environmental impact stocks](docs/screenshots/stock-flow-diagram-1.png)
+![Stock-flow diagram — consumer adoption, consumption, and environmental impact stocks](stock-flow-diagram-1.png)
 
-![Stock-flow diagram — policy intervention feedback loops](docs/screenshots/stock-flow-diagram-2.png)
+![Stock-flow diagram — policy intervention feedback loops](stock-flow-diagram-2.png)
 
 ## Key findings
 
@@ -29,7 +29,7 @@ Demographic assumptions are benchmarked to the EU market (ages 18–35, ~€1,50
 - Policies focused on **extending average item lifespan** and **enhancing consumer awareness** are the most effective levers for reducing average GHG emissions
 - Average consumption rate per adopter and word-of-mouth adoption are identified as the critical drivers of overall system behavior
 
-![Simulated effect of policy levers (product-options availability, circularity promotion, brand transparency, base awareness growth) on item consumption rate and cumulative environmental stocks over 60 months](docs/screenshots/policy-simulation-results.png)
+![Simulated effect of policy levers (product-options availability, circularity promotion, brand transparency, base awareness growth) on item consumption rate and cumulative environmental stocks over 60 months](policy-simulation-results.png)
 
 ## Files
 
