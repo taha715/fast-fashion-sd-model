@@ -1,0 +1,453 @@
+{UTF-8}
+Accumulated Waste= INTEG (
+	Item Disposal Rate,
+		0)
+	~	items
+	~		|
+
+Awareness Generation Rate=
+	Base Awareness Growth+(Availibility of Sustained Product Options*Sustainable Product Awareness per Option\
+		)+(Brand Transparency Effort Level*Transparency Effectiveness)+(Circularity Promotion Initiatives\
+		*Circularity Promotion Effectiveness)
+	~	
+	~		|
+
+Cumulative GHG Emissions= INTEG (
+	GHG Emission Rate,
+		0)
+	~	kg CO2e
+	~		|
+
+adoption from advertising=
+	advertising effectiveness*Potential Adopters*(1-Awareness Impact on Advertising)
+	~	people/Month
+	~		|
+
+adoption from word of mouth=
+	contact rate*adoption fraction*Potential Adopters*(1-Awareness impact on word of mouth\
+		)*(Adopters/total population)
+	~	people/Month
+	~		|
+
+Availibility of Sustained Product Options=
+	0.2
+	~	items
+	~		|
+
+Average Consumption Rate per Adopter=
+	20*Trend Speed Multiplier*Seasonal Multiplier
+	~	items/people/Month
+	~		|
+
+Average GHG Emission per Item=
+	25.5
+	~	kg CO2e
+	~		|
+
+Average Lifespan of the item=
+	2
+	~	Month
+	~		|
+
+Average Water Footprint per item=
+	2000
+	~	liters
+	~		|
+
+"Number of Adopters Driving Consumption (Intermediary)"=
+	Adopters
+	~	
+	~		|
+
+Awareness Impact on Advertising=
+	Consumer Awareness/Max Achievable Awareness
+	~	
+	~		|
+
+Awareness impact on word of mouth=
+	Consumer Awareness/Max Achievable Awareness
+	~	
+	~		|
+
+Base Awareness Growth=
+	0.005
+	~	people/Month
+	~		|
+
+Biochemical Oxygen Demand= INTEG (
+	Water Pollution Generation Rate,
+		0)
+	~	mg/liters
+	~		|
+
+BOD per litre of Water Used=
+	6000
+	~	mg/liters
+	~		|
+
+Brand Transparency Effort Level=
+	0.3
+	~	Dmnl
+	~		|
+
+Circularity Promotion Effectiveness=
+	0.025
+	~	Dmnl
+	~		|
+
+Circularity Promotion Initiatives=
+	0.2
+	~	Dmnl
+	~		|
+
+Consumer Awareness= INTEG (
+	Awareness Generation Rate,
+		0)
+	~	
+	~		|
+
+GHG Emission Rate=
+	Average GHG Emission per Item*Item Consumption Rate
+	~	kg CO2e/Month
+	~		|
+
+Trend Speed Multiplier=
+	1+(SIN(Time/2))*0.2
+	~	
+	~		|
+
+Cumulative Items Consumed= INTEG (
+	Item Consumption Rate,
+		0)
+	~	items
+	~		|
+
+Cumulative Water Used= INTEG (
+	Water Consumption Rate,
+		0)
+	~	gallons
+	~		|
+
+Max Achievable Awareness=
+	1
+	~	
+	~		|
+
+Transparency Effectiveness=
+	0.01
+	~	people/Month
+	~		|
+
+Item Disposal Rate=
+	DELAY1(Item Consumption Rate, Average Lifespan of the item)
+	~	
+	~		|
+
+Item Consumption Rate=
+	Average Consumption Rate per Adopter*"Number of Adopters Driving Consumption (Intermediary)"
+	~	items/Month
+	~		|
+
+Seasonal Multiplier=
+	1+(SIN(Time+2)*2*3.14/12)*0.15
+	~	
+	~		|
+
+Sustainable Product Awareness per Option=
+	0.03
+	~	Dmnl
+	~		|
+
+Water Pollution Generation Rate=
+	BOD per litre of Water Used*Water Consumption Rate
+	~	mg/liters/Month
+	~		|
+
+Water Consumption Rate=
+	Item Consumption Rate*Average Water Footprint per item
+	~	liters/Month
+	~		|
+
+Adopters= INTEG (
+	Item Adoption Rate,
+		1000
+		)
+	~	people
+	~		|
+
+adoption fraction=
+	0.2
+	~	Dmnl
+	~		|
+
+Item Adoption Rate=
+	adoption from advertising+adoption from word of mouth
+	~	people/Month
+	~		|
+
+advertising effectiveness=
+	0.02
+	~	1/Month
+	~		|
+
+contact rate=
+	20
+	~	1/Month
+	~		|
+
+Potential Adopters= INTEG (
+	-Item Adoption Rate,
+		5.82e+07)
+	~	people
+	~		|
+
+total population=
+	4.49e+08
+	~	people
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 60
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Arial Unicode MS|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|96,96,60,0
+10,1,Potential Adopters,912,385,45,20,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Adopters,1199,381,45,20,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,100,0,0,22,0,192,0,-1--1--1,,1|(1012,384)|
+1,4,5,2,4,0,0,22,0,192,0,-1--1--1,,1|(1117,384)|
+11,5,0,1074,384,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Item Adoption Rate,1074,422,75,30,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,adoption from advertising,983,483,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,advertising effectiveness,1057,541,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,9,8,7,1,0,0,0,0,192,0,-1--1--1,,1|(986,541)|
+1,10,1,7,1,0,0,0,0,192,0,-1--1--1,,1|(912,464)|
+1,11,7,6,1,0,0,0,0,192,0,-1--1--1,,1|(1052,476)|
+10,12,total population,1289,566,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,contact rate,1245,633,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,adoption fraction,1162,672,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,adoption from word of mouth,1194,495,75,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,16,12,15,1,0,0,0,0,192,0,-1--1--1,,1|(1279,523)|
+1,17,13,15,1,0,0,0,0,192,0,-1--1--1,,1|(1236,567)|
+1,18,14,15,1,0,0,0,0,192,0,-1--1--1,,1|(1200,595)|
+1,19,15,6,1,0,0,0,0,192,0,-1--1--1,,1|(1112,471)|
+1,20,1,15,1,0,0,0,0,192,0,-1--1--1,,1|(1002,586)|
+1,21,2,15,1,0,0,0,0,192,0,-1--1--1,,1|(1233,434)|
+10,22,Cumulative Items Consumed,1472,229,64,21,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,23,48,1129,232,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,24,26,23,100,0,0,22,0,192,0,-1--1--1,,1|(1187,232)|
+1,25,26,22,4,0,0,22,0,192,0,-1--1--1,,1|(1327,232)|
+11,26,0,1241,232,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,27,Item Consumption Rate,1241,275,58,35,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,Average Consumption Rate per Adopter,1237,142,81,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,"Number of Adopters Driving Consumption (Intermediary)",1414,314,92,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,30,2,29,1,0,0,0,0,192,0,-1--1--1,,1|(1361,362)|
+1,31,29,27,1,0,0,0,0,192,0,-1--1--1,,1|(1364,250)|
+1,32,28,27,1,0,0,0,0,192,0,-1--1--1,,1|(1200,195)|
+10,33,Trend Speed Multiplier,1425,97,58,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,34,33,28,1,0,0,0,0,192,0,-1--1--1,,1|(1320,61)|
+10,35,Time,1564,70,24,13,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,INITIAL TIME,1648,43,56,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,35,1,0,0,0,0,0,1,-1--1--1,,1|(1646,38)|
+1,38,35,33,1,0,0,0,0,192,0,-1--1--1,,1|(1493,32)|
+10,39,Seasonal Multiplier,1534,166,42,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,40,35,39,1,0,0,0,0,192,0,-1--1--1,,1|(1613,130)|
+1,41,39,28,1,0,0,0,0,192,0,-1--1--1,,1|(1412,165)|
+10,42,Accumulated Waste,1765,381,62,24,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,43,48,1457,376,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,44,46,43,100,0,0,22,0,192,0,-1--1--1,,1|(1524,376)|
+1,45,46,42,4,0,0,22,0,192,0,-1--1--1,,1|(1648,376)|
+11,46,0,1588,376,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,47,Item Disposal Rate,1588,408,61,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,48,Average Lifespan of the item,1589,498,65,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,49,27,47,1,0,0,0,0,192,0,-1--1--1,,1|(1359,384)|
+1,50,48,47,1,0,0,0,0,192,0,-1--1--1,,1|(1681,435)|
+10,51,Cumulative Water Used,912,233,53,24,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,52,48,545,230,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,53,55,52,100,0,0,22,0,192,0,-1--1--1,,1|(631,230)|
+1,54,55,51,4,0,0,22,0,192,0,-1--1--1,,1|(789,230)|
+11,55,0,713,230,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,56,Water Consumption Rate,713,273,58,35,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,57,Average Water Footprint per item,688,377,66,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,58,27,56,1,0,0,0,0,192,0,-1--1--1,,1|(969,318)|
+1,59,57,56,1,0,0,0,0,192,0,-1--1--1,,1|(749,354)|
+10,60,Biochemical Oxygen Demand,911,130,66,35,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,61,48,537,124,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,62,64,61,100,0,0,22,0,192,0,-1--1--1,,1|(617,124)|
+1,63,64,60,4,0,0,22,0,192,0,-1--1--1,,1|(772,124)|
+11,64,0,693,124,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,65,Water Pollution Generation Rate,693,156,71,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,66,BOD per litre of Water Used,700,37,72,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,67,56,65,1,0,0,0,0,192,0,-1--1--1,,1|(569,233)|
+1,68,66,65,1,0,0,0,0,192,0,-1--1--1,,1|(755,100)|
+10,69,Cumulative GHG Emissions,1160,-24,73,24,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,70,48,842,-22,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,71,73,70,100,0,0,22,0,192,0,-1--1--1,,1|(910,-22)|
+1,72,73,69,4,0,0,22,0,192,0,-1--1--1,,1|(1034,-22)|
+11,73,0,975,-22,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,74,GHG Emission Rate,975,10,65,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,75,Average GHG Emission per Item,1379,-33,62,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,76,27,74,1,0,0,0,0,192,0,-1--1--1,,1|(1039,198)|
+1,77,75,74,1,0,0,0,0,192,0,-1--1--1,,1|(1192,68)|
+10,78,Consumer Awareness,934,642,49,24,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,79,48,627,639,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,80,82,79,100,0,0,22,0,192,0,-1--1--1,,1|(696,639)|
+1,81,82,78,4,0,0,22,0,192,0,-1--1--1,,1|(826,639)|
+11,82,0,761,639,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,83,Awareness Generation Rate,761,671,71,24,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,84,Brand Transparency Effort Level,879,755,60,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,85,Availibility of Sustained Product Options,646,740,71,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,86,Circularity Promotion Initiatives,1076,753,46,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,87,Base Awareness Growth,421,666,74,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,88,Transparency Effectiveness,625,858,60,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,89,Sustainable Product Awareness per Option,842,866,87,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,90,Circularity Promotion Effectiveness,1090,855,60,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,91,87,83,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,92,85,83,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,93,84,83,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,94,86,83,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,95,90,83,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,96,89,83,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,97,88,83,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,98,Awareness Impact on Advertising,467,475,49,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,99,Awareness impact on word of mouth,467,556,66,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,100,Max Achievable Awareness,664,470,68,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,101,78,98,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,102,78,99,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,103,100,98,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,104,100,99,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,105,98,7,1,0,0,0,0,192,0,-1--1--1,,1|(706,525)|
+1,106,99,15,1,0,0,0,0,192,0,-1--1--1,,1|(851,599)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 2
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,90,0
+12,1,0,1290,139,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+Availibility of Sustained Product Options,0,1,0.1
+12,2,0,1289,227,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+Circularity Promotion Initiatives,0,1,0.1
+12,3,0,1296,322,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+Brand Transparency Effort Level,0,1,0.1
+12,4,0,1299,418,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+Base Awareness Growth,0,0.1,0.0005
+12,5,0,291,318,287,208,8,15,0,0,1,0,0,0,0,0,0,0,0,0
+policy_consumption
+12,6,0,871,321,286,211,8,15,0,0,1,0,0,0,0,0,0,0,0,0
+Policies_Environment
+///---\\\
+:GRAPH GRAPH
+:TITLE GRAPH
+:SCALE
+:VAR Adopters
+:Y-MIN 0
+:Y-MAX 1e+08
+:DATASET 
+:SCALE
+:VAR Potential Adopters
+:Y-MIN 0
+:Y-MAX 1e+08
+:DATASET 
+:SCALE
+:VAR Former Adopters
+:Y-MIN 0
+:Y-MAX 1e+08
+:DATASET 
+
+:GRAPH policy_consumption
+:TITLE Effect of Policies on Item Consumption Rate
+:SCALE
+:VAR Item Consumption Rate
+:DATASET 
+:LINE-WIDTH 1
+
+:GRAPH Policies_Environment
+:TITLE Effect of Policies on Environmental Stocks
+:SCALE
+:VAR Accumulated Waste
+:DATASET 
+:LINE-WIDTH 1
+:SCALE
+:VAR Biochemical Oxygen Demand
+:DATASET 
+:LINE-WIDTH 1
+:SCALE
+:VAR Cumulative GHG Emissions
+:DATASET 
+:LINE-WIDTH 1
+:SCALE
+:VAR Cumulative Water Used
+:DATASET 
+:LINE-WIDTH 1
+:SCALE
+:VAR Accumulated Waste
+:DATASET 
+:LINE-WIDTH 1
+:SCALE
+:VAR Accumulated Waste
+:DATASET 
+:LINE-WIDTH 1
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:adoption from word of mouth
+9:current
+19:60,0
+24:0
+25:60
+26:60
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
